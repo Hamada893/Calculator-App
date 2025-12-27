@@ -1,11 +1,18 @@
+import { useEffect } from "react";
 import useFitText from "use-fit-text";
 import "./Screen.css"
 
-function Screen({ value }) {
-  const { fontSize, ref } = useFitText();
+export default function Screen({ value }) {
+  const { fontSize, ref, recalc } = useFitText();
+
+  useEffect(() => {
+    if (recalc) {
+      recalc();
+    }
+  }, [value, recalc]);
 
   return (
-    <div ref={ref} style={{ fontSize }}>
+    <div className="screen" ref={ref}>
       {value}
     </div>
   );
